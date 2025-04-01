@@ -7,36 +7,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the repository to a specific folder in the runner workspace
+    # Step 1: Checkout the repository into the specified folder
     - name: Checkout the repository to a specific folder
       uses: actions/checkout@v2
       with:
-        repository: your-username/your-repo  # Replace with your actual repo
-        path: ./my-folder  # The folder to clone the repo into on the runner's workspace
+        repository: 'Ramia-Suresh/passing_argument'  # Replace with your actual repository
+        path: './my-folder'  # Path to the folder inside the workspace where the repo will be cloned
 
-    # Step 2: Change directory to 'my-folder' and list files
-    - name: List files in my-folder
-      run: |
-        cd my-folder  # Change to the 'my-folder' directory
-        ls -lrth      # List files inside 'my-folder'
+    # Step 2: List files in the cloned folder to ensure repo is checked out correctly
+    - name: List files in the cloned folder
+      run: ls -lrth ./my-folder  # List files in the 'my-folder' to confirm the repo is cloned correctly
 
     # Step 3: Set up Python
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'  # Specify the Python version
+        python-version: '3.9'  # Specify the Python version to use in the workflow
 
     # Step 4: Create a virtual environment and install dependencies
     - name: Create Virtual Environment and Install Dependencies
       run: |
-        cd my-folder  # Change to the 'my-folder' directory
-        python -m venv venv  # Create virtual environment inside the runner
+        python -m venv venv  # Create a virtual environment
         source venv/bin/activate  # Activate the virtual environment
-        pip install -r requirements.txt  # Install dependencies inside venv
+        pip install --upgrade pip  # Update pip to the latest version
+        pip install -r ./my-folder/requirements.txt  # Install dependencies from the requirements.txt file
 
-    # Step 5: Run Python script from the cloned repo
+    # Step 5: Run the Python script from the cloned repo
     - name: Run Python Script
       run: |
-        cd my-folder  # Change to the 'my-folder' directory
-        source venv/bin/activate  # Activate the virtual environment again
-        python my_script.py  # Run the Python script inside the virtual environment
+        source venv/bin/activate  # Re-activate the virtual environment
+        python ./my-folder/my_script.py  # Run the Python script inside the virtual environment
