@@ -1,6 +1,10 @@
 name: Python Workflow
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow for push to the main branch
+      - devops  # Trigger the workflow for push to the devops branch (if needed)
 
 jobs:
   build:
@@ -11,7 +15,7 @@ jobs:
     - name: Checkout the repository to a specific folder
       uses: actions/checkout@v2
       with:
-        repository: your-username/your-repo  # Replace with your actual repo
+        repository: 'Ramia-Suresh/passing_argument'  # Replace with your actual username and repo name
         path: ./my-folder  # The folder to clone the repo into on the runner's workspace
 
     # Step 2: List files in the folder to ensure repo is checked out correctly
