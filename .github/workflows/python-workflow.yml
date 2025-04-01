@@ -36,4 +36,4 @@ jobs:
     - name: Run Python Script
       run: |
         source venv/bin/activate  # Re-activate the virtual environment
-        python ./my-folder/my_script.py  # Run the Python script inside the virtual environment
+        python ./my-folder/my-folder/my_script.py  # Run the Python script inside the virtual environment
