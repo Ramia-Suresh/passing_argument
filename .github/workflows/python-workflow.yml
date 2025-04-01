@@ -30,7 +30,7 @@ jobs:
         python -m venv venv  # Create a virtual environment
         source venv/bin/activate  # Activate the virtual environment
         pip install --upgrade pip  # Update pip to the latest version
-        pip install -r ./my-folder/requirements.txt  # Install dependencies from the requirements.txt file
+        pip install -r ./my-folder/my-folder/requirements.txt  # Install dependencies from the requirements.txt file
 
     # Step 5: Run the Python script from the cloned repo
     - name: Run Python Script
