@@ -1,0 +1,38 @@
+name: Python Workflow
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository to a specific folder in the runner workspace
+    - name: Checkout the repository to a specific folder
+      uses: actions/checkout@v2
+      with:
+        repository: your-username/your-repo  # Replace with your actual repo
+        path: ./my-folder  # The folder to clone the repo into on the runner's workspace
+
+    # Step 2: List files in the folder to ensure repo is checked out correctly
+    - name: List files in the cloned folder
+      run: ls ./my-folder  # List files inside the cloned folder on the runner
+
+    # Step 3: Set up Python
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'  # Specify the Python version
+
+    # Step 4: Create a virtual environment and install dependencies
+    - name: Create Virtual Environment and Install Dependencies
+      run: |
+        python -m venv venv  # Create virtual environment inside the runner
+        source venv/bin/activate  # Activate the virtual environment
+        pip install -r ./my-folder/requirements.txt  # Install dependencies inside venv
+
+    # Step 5: Run Python script from the cloned repo
+    - name: Run Python Script
+      run: |
+        source venv/bin/activate  # Activate the virtual environment again
+        python ./my-folder/my_script.py  # Run the Python script inside the virtual environment
